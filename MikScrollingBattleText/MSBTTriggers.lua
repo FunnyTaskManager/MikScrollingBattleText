@@ -81,6 +81,7 @@ local triggersToFire = {}
 
 -- Hold buffs and debuffs that should be suppressed since there is a trigger for them.
 local triggerSuppressions = {}
+local _
 
 
 -------------------------------------------------------------------------------
@@ -204,7 +205,7 @@ local function CreateConditionFuncs()
 
  -- Exception conditions.
  exceptionConditionFuncs = {
-  activeTalents = function (f, t, v) return f(GetActiveTalentGroup(), v) end,
+  activeTalents = function (f, t, v) return f(C_Talent and C_Talent.GetActiveTalentGroup and C_Talent.GetActiveTalentGroup() or GetActiveTalentGroup(), v) end,
   buffActive = function (f, t, v) return UnitBuff("player", v) and true or false end,
   buffInactive = function (f, t, v) return not UnitBuff("player", v) and true or false end,
   currentCP = function (f, t, v) return f(GetComboPoints("player"), v) end,
